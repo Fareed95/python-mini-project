@@ -1,0 +1,46 @@
+services:
+  model:
+    build:
+      context: ./models
+      dockerfile: Dockerfile
+    container_name: model_api_run
+    volumes:
+      - ./models:/app
+    ports:
+      - "8001:8001"
+    networks:
+      - templet
+
+  server:
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    container_name: server_api_run
+    volumes:
+      - ./server:/app
+    ports:
+      - "8000:8000"
+    networks:
+      - templet
+    depends_on:
+      - model
+  
+  cliemt:
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+    container_name: client_api_run
+    volumes:
+      - ./client:/app
+    ports:
+      - "3000:3000"
+    networks:
+      - templet
+    depends_on:
+      - server
+
+
+
+networks:
+  templet:
+    driver: bridge

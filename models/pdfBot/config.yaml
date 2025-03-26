@@ -1,0 +1,16 @@
+BASE_EMBEDDINGS: sentence-transformers/all-mpnet-base-v2
+MODEL_CONFIG:
+  model_name: llama-3.1-8b-instant
+  temperature: 0.2
+  max_tokens: 512
+
+EMBEDDING_MODEL: sentence-transformers/all-mpnet-base-v2
+DEVICE: cpu
+
+chunk_size: 512
+chunk_overlap: 100
+
+VECTORDB:
+  PATH: ./vectordb/chroma
+
+PROMPT_TYPE: llama3
